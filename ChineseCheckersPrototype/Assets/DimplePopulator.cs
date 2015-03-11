@@ -7,6 +7,8 @@ public class DimplePopulator : MonoBehaviour
 
 	//Simple material to draw some basic circles
 	float ballRadius;
+	GameObject redBallObjectOne;
+	GameObject blueBallObjectOne;
 
 	//We need to populate all the dimples
 	void Start () 
@@ -43,8 +45,8 @@ public class DimplePopulator : MonoBehaviour
 		Dimple blueDimpleSix = 	new Dimple(TeamColor.BLUE, blueSixPos);
 
 		//Create ball game objects
-		GameObject redBallObjectOne = GameObject.Instantiate(ballObject) as GameObject;
-		GameObject blueBallObjectOne = GameObject.Instantiate(ballObject) as GameObject;
+		redBallObjectOne = GameObject.Instantiate(ballObject) as GameObject;
+		blueBallObjectOne = GameObject.Instantiate(ballObject) as GameObject;
 
 		redBallObjectOne.AddComponent<Ball>();
 		blueBallObjectOne.AddComponent<Ball>();
@@ -63,5 +65,12 @@ public class DimplePopulator : MonoBehaviour
 
 
 		ballRadius = ballObject.transform.localScale.x;
+	}
+
+	void Update(){
+		if(redBallObjectOne.GetComponent<Ball>().updateDimple){
+			redBallObjectOne.GetComponent<Ball>().updateDimple = false;
+			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().currentDimple.position;
+		}
 	}
 }

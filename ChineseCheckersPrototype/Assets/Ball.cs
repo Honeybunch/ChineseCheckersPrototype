@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
 	public TeamColor BallColor;
 	public Dimple currentDimple;
 	SelectionState selectionState;
+	public bool updateDimple = false;
 
 	// Use this for initialization
 	void Start ()
@@ -77,7 +78,7 @@ public class Ball : MonoBehaviour
 		currentDimple = moveToDimple;
 		currentDimple.toggleOccupied();
 
-
-		return true;
+	
+		return updateDimple = true;;
 	}
 }
