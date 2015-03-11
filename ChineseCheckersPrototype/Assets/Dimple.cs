@@ -21,15 +21,15 @@ public enum TeamColor
 	BLUE
 }
 
-public struct Neigbor
+public struct Neighbor
 {
-	Dimple dimple;
-	Direction direction;
+	public Dimple dimple;
+	public Direction direction;
 }
 
 public class Dimple
 {
-	public List<Neigbor> neigbors = new List<Neigbor>();
+	public List<Neighbor> neigbors = new List<Neighbor>();
 	public TeamColor homeColor;
 	public Vector3 position;
 	bool occupied = false;
@@ -64,8 +64,17 @@ public class Dimple
 		}
 	}
 
-	public void AddNeighboringDimple(Neigbor neigbor)
+	public void AddNeighboringDimple(Neighbor neigbor)
 	{
 		neigbors.Add(neigbor);
 	}
+
+	public void toggleOccupied(){
+		occupied = !occupied;
+	}
+
+	public bool isOccupied(){
+		return occupied;
+	}
+
 }

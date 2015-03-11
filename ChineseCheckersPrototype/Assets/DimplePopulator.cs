@@ -55,6 +55,13 @@ public class DimplePopulator : MonoBehaviour
 		redBallObjectOne.transform.position = blueTwoPos;
 		blueBallObjectOne.transform.position = redTwoPos;
 
+		redDimpleTwo.toggleOccupied();
+		blueDimpleTwo.toggleOccupied();
+
+		redBallObjectOne.GetComponent<Ball>().currentDimple = redDimpleTwo;
+		blueBallObjectOne.GetComponent<Ball>().currentDimple = blueDimpleTwo;
+
+
 		ballRadius = ballObject.transform.localScale.x;
 	}
 }

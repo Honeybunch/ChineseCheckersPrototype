@@ -11,7 +11,7 @@ public class Ball : MonoBehaviour
 	}
 
 	public TeamColor BallColor;
-
+	public Dimple currentDimple;
 	SelectionState selectionState;
 
 	// Use this for initialization
@@ -33,6 +33,7 @@ public class Ball : MonoBehaviour
 	void OnMouseOver()
 	{
 		Debug.Log(gameObject.renderer.material.color);
+		selectionState = SelectionState.HIGHLIGHTED;
 	}
 
 	void Update()
@@ -49,5 +50,29 @@ public class Ball : MonoBehaviour
 			gameObject.renderer.material.SetColor("Outline Color", Color.black);
 			break;
 		}
+	}
+
+	/* method that will move a ball in a certain direction, or hop in a certain direction */
+
+	bool moveBall(Direction d){
+		bool validMove =true;
+		Dimple moveToDimple = null;
+		foreach(Neighbor n in currentDimple.neigbors){
+			if(n.direction == d){
+				moveToDimple =n.dimple;
+			}
+		}
+		if(moveToDimple==null){
+			validMove = false; 
+		}else{
+			if(moveToDimple.isOccupied()){
+
+			}else{
+
+
+			}
+		}
+
+		return validMove;
 	}
 }
