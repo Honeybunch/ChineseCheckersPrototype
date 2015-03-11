@@ -50,29 +50,34 @@ public class Ball : MonoBehaviour
 			gameObject.renderer.material.SetColor("Outline Color", Color.black);
 			break;
 		}
+
 	}
 
 	/* method that will move a ball in a certain direction, or hop in a certain direction */
 
 	bool moveBall(Direction d){
-		bool validMove =true;
-		Dimple moveToDimple = null;
-		foreach(Neighbor n in currentDimple.neigbors){
-			if(n.direction == d){
-				moveToDimple =n.dimple;
-			}
-		}
+		Dimple moveToDimple = currentDimple.getNeighborAtDirection(d);
+
 		if(moveToDimple==null){
-			validMove = false; 
-		}else{
+			return false;
+		}
+		else{
 			if(moveToDimple.isOccupied()){
-
-			}else{
-
+				// if moveToDimple alreayd has a ball, check if we can jump
+				moveToDimple = moveToDimple.getNeighborAtDirection(d);
+				// valid jump?
+				if(moveToDimple == null || moveToDimple.isOccupied()){
+					return false;
+				}
 
 			}
 		}
+		currentDimple.toggleOccupied();
+		// This is where we update position?
+		currentDimple = moveToDimple;
+		currentDimple.toggleOccupied();
 
-		return validMove;
+
+		return true;
 	}
 }

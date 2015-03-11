@@ -77,4 +77,15 @@ public class Dimple
 		return occupied;
 	}
 
+
+	public Dimple getNeighborAtDirection(Direction d){
+		Dimple moveToDimple = null;
+		foreach(Neighbor n in neigbors){
+			if(n.direction == d){
+				moveToDimple =n.dimple;
+			}
+		}
+		return moveToDimple;
+
+	}
 }
