@@ -5,12 +5,12 @@ using System.Collections.Generic;
 //Keeping these clockwise
 public enum Direction
 {
-	LEFT,
-	UP_LEFT,
-	UP_RIGHT,
-	RIGHT,
-	DOWN_RIGHT,
-	DOWN_LEFT
+	LEFT = 0,
+	UP_LEFT =1,
+	UP_RIGHT = 2,
+	RIGHT = 3,
+	DOWN_RIGHT = 4,
+	DOWN_LEFT = 5
 }
 
 //Different home locations that the dimples could belong to
@@ -73,8 +73,23 @@ public class Dimple
 
 	public void AddNeighboringDimple(Neighbor n)
 	{	
+		// add the neighbor if there isn't already one in that direction
+		if(getNeighborAtDirection(n.direction)==null){
+			neighbors.Add(n);
+		}else{
+			return;
+		}
 
-		neighbors.Add(n);
+
+		Dimple neighborDimple = n.dimple;
+
+		// get direction to THIS dimple from new neighbor
+		Direction acrossDirection = acrossFromDirection(n.direction);
+
+		// ad THIS dimple as neighbor to the neighbor at the new direction
+		if(neighborDimple.getNeighborAtDirection(acrossDirection)==null){
+			neighborDimple.AddNeighboringDimple(new Neighbor(this,acrossDirection));
+		}
 	}
 
 	public void toggleOccupied(){
@@ -95,5 +110,14 @@ public class Dimple
 		}
 		return moveToDimple;
 
+	}
+
+	Direction acrossFromDirection(Direction d){
+		if((int)d >2){
+			return d-3;		
+		}
+		else{
+			return d+3;
+		}
 	}
 }

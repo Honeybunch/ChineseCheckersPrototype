@@ -89,6 +89,35 @@ public class DimplePopulator : MonoBehaviour
 
 		/*neighbor population*/
 		redDimpleOne.AddNeighboringDimple(new Neighbor(redDimpleTwo, Direction.RIGHT));
+		redDimpleOne.AddNeighboringDimple(new Neighbor(noneDimpleOne, Direction.DOWN_LEFT));
+		redDimpleOne.AddNeighboringDimple(new Neighbor(noneDimpleTwo, Direction.DOWN_RIGHT));
+
+		//redDimpleTwo.AddNeighboringDimple(new Neighbor(redDimpleOne, Direction.LEFT));
+		redDimpleTwo.AddNeighboringDimple(new Neighbor(redDimpleThree, Direction.RIGHT));
+		redDimpleTwo.AddNeighboringDimple(new Neighbor(noneDimpleTwo, Direction.DOWN_LEFT));
+		redDimpleTwo.AddNeighboringDimple(new Neighbor(noneDimpleThree, Direction.DOWN_RIGHT));
+
+		//redDimpleThree.AddNeighboringDimple(new Neighbor(redDimpleTwo, Direction.LEFT));
+		redDimpleThree.AddNeighboringDimple(new Neighbor(noneDimpleThree, Direction.DOWN_LEFT));
+		redDimpleThree.AddNeighboringDimple(new Neighbor(noneDimpleFour, Direction.DOWN_RIGHT));
+
+		//noneDimpleOne.AddNeighboringDimple(new Neighbor(redDimpleOne, Direction.UP_RIGHT));
+		noneDimpleOne.AddNeighboringDimple(new Neighbor(blueDimpleOne, Direction.DOWN_RIGHT));		
+		noneDimpleOne.AddNeighboringDimple(new Neighbor(noneDimpleTwo, Direction.RIGHT));
+
+		noneDimpleTwo.AddNeighboringDimple(new Neighbor(noneDimpleThree, Direction.RIGHT));
+		noneDimpleTwo.AddNeighboringDimple(new Neighbor(blueDimpleOne, Direction.DOWN_LEFT));
+		noneDimpleTwo.AddNeighboringDimple(new Neighbor(blueDimpleTwo, Direction.DOWN_RIGHT));
+
+		noneDimpleThree.AddNeighboringDimple(new Neighbor(noneDimpleFour, Direction.RIGHT));
+		noneDimpleThree.AddNeighboringDimple(new Neighbor(blueDimpleTwo, Direction.DOWN_LEFT));
+		noneDimpleThree.AddNeighboringDimple(new Neighbor(blueDimpleThree, Direction.DOWN_RIGHT));
+
+		noneDimpleFour.AddNeighboringDimple(new Neighbor(blueDimpleThree,Direction.DOWN_LEFT));
+
+		blueDimpleOne.AddNeighboringDimple(new Neighbor(blueDimpleTwo,Direction.RIGHT));
+
+		blueDimpleTwo.AddNeighboringDimple(new Neighbor(blueDimpleThree,Direction.RIGHT));
 		//////
 	}
 
