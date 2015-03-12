@@ -55,7 +55,8 @@ public class Dimple
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 		go.transform.localScale = new Vector3(.35f, 0, .35f);
 		go.transform.position = position;
-		go.renderer.material = new Material(Shader.Find("Diffuse"));
+		//Collider will interfere with mouseover
+		GameObject.Destroy(go.GetComponent<Collider>());
 
 		switch(homeColor)
 		{

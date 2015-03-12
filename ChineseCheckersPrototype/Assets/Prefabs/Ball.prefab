@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 450828}
   - 33: {fileID: 3350828}
-  - 135: {fileID: 13550828}
   - 23: {fileID: 2350828}
+  - 135: {fileID: 13518692}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150828}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &13550828
+--- !u!135 &13518692
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
