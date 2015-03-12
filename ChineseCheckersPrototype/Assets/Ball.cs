@@ -144,15 +144,11 @@ public class Ball : MonoBehaviour
 
 		CurrentDimple = moveToDimple;
 		CurrentDimple.toggleOccupied();
-		Debug.Log (CurrentDimple);
 
 		Vector3 newPos = this.transform.position;
 		newPos.x = CurrentDimple.transform.position.x;
 		newPos.z = CurrentDimple.transform.position.z;
 		this.transform.position = newPos;
-
-		CurrentDimple = moveToDimple;
-		CurrentDimple.toggleOccupied();
 
 		return true;
 	
