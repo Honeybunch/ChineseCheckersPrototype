@@ -18,13 +18,19 @@ public enum TeamColor
 {
 	NONE,
 	RED,
-	BLUE
+	BLUE,
+	TEST
 }
 
 public struct Neighbor
 {
 	public Dimple dimple;
 	public Direction direction;
+
+	public Neighbor(Dimple dimp, Direction dir){
+		dimple = dimp;
+		direction = dir;
+	}
 }
 
 public class Dimple
@@ -64,9 +70,10 @@ public class Dimple
 		}
 	}
 
-	public void AddNeighboringDimple(Neighbor neigbor)
-	{
-		neigbors.Add(neigbor);
+	public void AddNeighboringDimple(Neighbor n)
+	{	
+
+		neigbors.Add(n);
 	}
 
 	public void toggleOccupied(){

@@ -10,7 +10,17 @@ public class DimplePopulator : MonoBehaviour
 	GameObject redBallObjectOne;
 	GameObject blueBallObjectOne;
 
-	//We need to populate all the dimples
+	Dimple redDimpleOne;
+	Dimple redDimpleTwo;
+	Dimple redDimpleThree;
+	Dimple blueDimpleOne;
+	Dimple blueDimpleTwo;
+	Dimple blueDimpleThree;
+	Dimple noneDimpleOne;
+	Dimple noneDimpleTwo;
+	Dimple noneDimpleThree;
+	Dimple noneDimpleFour;
+
 	void Start () 
 	{
 		//Setup dimples and balls
@@ -23,26 +33,36 @@ public class DimplePopulator : MonoBehaviour
 		Vector3 redFivePos = 	centerPosition + new Vector3( 0.5f, .05f, 1.0f);
 		Vector3 redSixPos = 	centerPosition + new Vector3(	 0, .05f, 1.5f);
 
+		Vector3 noneOnePos =    centerPosition + new Vector3(-1.5f, .05f, 0f);
+		Vector3 noneTwoPos =    centerPosition + new Vector3(-.5f, .05f, 0f);
+		Vector3 noneThreePos =  centerPosition + new Vector3(.5f, .05f, 0f);
+		Vector3 noneFourPos =   centerPosition + new Vector3(1.5f, .05f, 0f);
+		
 		Vector3 blueOnePos = 	centerPosition + new Vector3(-1.0f, .05f, -.5f);
 		Vector3 blueTwoPos = 	centerPosition + new Vector3(	 0, .05f, -.5f);
 		Vector3 blueThreePos = 	centerPosition + new Vector3( 1.0f, .05f, -.5f);
 		Vector3 blueFourPos = 	centerPosition + new Vector3(-0.5f, .05f, -1.0f);
 		Vector3 blueFivePos = 	centerPosition + new Vector3( 0.5f, .05f, -1.0f);
 		Vector3 blueSixPos = 	centerPosition + new Vector3(	 0, .05f, -1.5f);
+		
+		redDimpleOne = 	new Dimple(TeamColor.RED, redOnePos);
+		redDimpleTwo = 	new Dimple(TeamColor.RED, redTwoPos);
+		redDimpleThree = new Dimple(TeamColor.RED, redThreePos);
+		//Dimple redDimpleFour = 	new Dimple(TeamColor.RED, redFourPos);
+		//Dimple redDimpleFive = 	new Dimple(TeamColor.RED, redFivePos);
+		//Dimple redDimpleSix = 	new Dimple(TeamColor.RED, redSixPos);
 
-		Dimple redDimpleOne = 	new Dimple(TeamColor.RED, redOnePos);
-		Dimple redDimpleTwo = 	new Dimple(TeamColor.RED, redTwoPos);
-		Dimple redDimpleThree = new Dimple(TeamColor.RED, redThreePos);
-		Dimple redDimpleFour = 	new Dimple(TeamColor.RED, redFourPos);
-		Dimple redDimpleFive = 	new Dimple(TeamColor.RED, redFivePos);
-		Dimple redDimpleSix = 	new Dimple(TeamColor.RED, redSixPos);
+		noneDimpleOne	= new Dimple(TeamColor.NONE, noneOnePos);
+		noneDimpleTwo 	= new Dimple(TeamColor.NONE, noneTwoPos);
+		noneDimpleThree	= new Dimple(TeamColor.NONE, noneThreePos);
+		noneDimpleFour 	= new Dimple(TeamColor.NONE, noneFourPos);
 
-		Dimple blueDimpleOne = 	new Dimple(TeamColor.BLUE, blueOnePos);
-		Dimple blueDimpleTwo = 	new Dimple(TeamColor.BLUE, blueTwoPos);
-		Dimple blueDimpleThree =new Dimple(TeamColor.BLUE, blueThreePos);
-		Dimple blueDimpleFour = new Dimple(TeamColor.BLUE, blueFourPos);
-		Dimple blueDimpleFive = new Dimple(TeamColor.BLUE, blueFivePos);
-		Dimple blueDimpleSix = 	new Dimple(TeamColor.BLUE, blueSixPos);
+		blueDimpleOne 	= 	new Dimple(TeamColor.BLUE, blueOnePos);
+		blueDimpleTwo 	= 	new Dimple(TeamColor.BLUE, blueTwoPos);
+		blueDimpleThree =new Dimple(TeamColor.BLUE, blueThreePos);
+		//Dimple blueDimpleFour = new Dimple(TeamColor.BLUE, blueFourPos);
+		//Dimple blueDimpleFive = new Dimple(TeamColor.BLUE, blueFivePos);
+		//Dimple blueDimpleSix = 	new Dimple(TeamColor.BLUE, blueSixPos);
 
 		//Create ball game objects
 		redBallObjectOne = GameObject.Instantiate(ballObject) as GameObject;
@@ -65,6 +85,11 @@ public class DimplePopulator : MonoBehaviour
 
 
 		ballRadius = ballObject.transform.localScale.x;
+
+
+		/*neighbor population*/
+		redDimpleOne.AddNeighboringDimple(new Neighbor(redDimpleTwo, Direction.RIGHT));
+		//////
 	}
 
 	void Update(){
@@ -72,5 +97,11 @@ public class DimplePopulator : MonoBehaviour
 			redBallObjectOne.GetComponent<Ball>().updateDimple = false;
 			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().currentDimple.position;
 		}
+
+		foreach(Neighbor n in redDimpleOne.neigbors){
+
+		}
 	}
+
+
 }
