@@ -98,7 +98,7 @@ public class DimplePopulator : MonoBehaviour
 			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().currentDimple.position;
 		}
 
-		foreach(Neighbor n in redDimpleOne.neigbors){
+		foreach(Neighbor n in redDimpleOne.neighbors){
 
 		}
 	}

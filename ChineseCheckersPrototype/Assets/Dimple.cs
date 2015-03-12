@@ -35,7 +35,7 @@ public struct Neighbor
 
 public class Dimple
 {
-	public List<Neighbor> neigbors = new List<Neighbor>();
+	public List<Neighbor> neighbors = new List<Neighbor>();
 	public TeamColor homeColor;
 	public Vector3 position;
 	bool occupied = false;
@@ -74,7 +74,7 @@ public class Dimple
 	public void AddNeighboringDimple(Neighbor n)
 	{	
 
-		neigbors.Add(n);
+		neighbors.Add(n);
 	}
 
 	public void toggleOccupied(){
@@ -88,7 +88,7 @@ public class Dimple
 
 	public Dimple getNeighborAtDirection(Direction d){
 		Dimple moveToDimple = null;
-		foreach(Neighbor n in neigbors){
+		foreach(Neighbor n in neighbors){
 			if(n.direction == d){
 				moveToDimple =n.dimple;
 			}
