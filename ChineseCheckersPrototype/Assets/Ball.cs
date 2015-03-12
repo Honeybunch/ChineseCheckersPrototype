@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Ball : MonoBehaviour 
 {
@@ -15,6 +16,9 @@ public class Ball : MonoBehaviour
 	SelectionState selectionState;
 	public bool updateDimple = false;
 
+	public static List<Ball> Balls = new List<Ball>();
+	public static bool Selected;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -29,12 +33,39 @@ public class Ball : MonoBehaviour
 		default:
 			break;
 		}	
+
+		Balls.Add(this);
 	}
 
 	void OnMouseOver()
 	{
-		Debug.Log(gameObject.renderer.material.color);
-		selectionState = SelectionState.HIGHLIGHTED;
+		//If we click on a ball, it is selected and we lock into that
+		if(Input.GetMouseButtonDown(0))
+		{
+			selectionState = SelectionState.SELECTED;
+			Selected = true;
+		}
+
+		//Otherwise we're just highlighting the ball if there are no other balls selected
+		else if(!Selected)
+		{
+			selectionState = SelectionState.HIGHLIGHTED;
+
+			//Make sure every other ball is not in a highlighted state
+			foreach(Ball b in Balls)
+			{
+				if(b != this)
+					b.selectionState = SelectionState.NONE;
+
+			}
+		}
+	
+	}
+
+	void OnMouseExit()
+	{
+		if(selectionState != SelectionState.SELECTED)
+			selectionState = SelectionState.NONE;
 	}
 
 	void Update()
@@ -42,13 +73,13 @@ public class Ball : MonoBehaviour
 		switch(selectionState)
 		{
 		case SelectionState.HIGHLIGHTED:
-			gameObject.renderer.material.SetColor("Outline Color", Color.cyan);
+			gameObject.renderer.material.SetColor("_OutlineColor", Color.cyan);
 			break;
 		case SelectionState.SELECTED:
-			gameObject.renderer.material.SetColor("Outline Color", Color.green);
+			gameObject.renderer.material.SetColor("_OutlineColor", Color.green);
 			break;
 		default:
-			gameObject.renderer.material.SetColor("Outline Color", Color.black);
+			gameObject.renderer.material.SetColor("_OutlineColor", Color.black);
 			break;
 		}
 
