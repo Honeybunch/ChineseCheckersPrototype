@@ -4,35 +4,20 @@ using System.Collections.Generic;
 
 public class Ball : MonoBehaviour 
 {
-	enum SelectionState
-	{
-		NONE,
-		HIGHLIGHTED,
-		SELECTED
-	}
-
 	public TeamColor BallColor;
-	public Dimple currentDimple;
+	public Dimple CurrentDimple;
+	public bool UpdateDimple = false;
+
 	SelectionState selectionState;
-	public bool updateDimple = false;
 
 	public static List<Ball> Balls = new List<Ball>();
 	public static bool Selected;
+	public static Ball SelectedBall;
 
 	// Use this for initialization
 	void Start ()
 	{
-		switch(BallColor)
-		{
-		case TeamColor.BLUE:
-			gameObject.renderer.material.color = Color.blue;
-			break;
-		case TeamColor.RED:
-			gameObject.renderer.material.color = Color.red;
-			break;
-		default:
-			break;
-		}	
+		setDefaultColor();
 
 		Balls.Add(this);
 	}
@@ -40,10 +25,14 @@ public class Ball : MonoBehaviour
 	void OnMouseOver()
 	{
 		//If we click on a ball, it is selected and we lock into that
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonDown(0) && !Selected)
 		{
 			selectionState = SelectionState.SELECTED;
+
 			Selected = true;
+			SelectedBall = this;
+
+			HighlightNeighboringDimples();
 		}
 
 		//Otherwise we're just highlighting the ball if there are no other balls selected
@@ -56,7 +45,6 @@ public class Ball : MonoBehaviour
 			{
 				if(b != this)
 					b.selectionState = SelectionState.NONE;
-
 			}
 		}
 	
@@ -83,10 +71,60 @@ public class Ball : MonoBehaviour
 			break;
 		}
 
+		//Input to break out of selection state
+		if(Input.GetMouseButtonDown(1))
+		{
+			if(Selected)
+			{
+				SelectedBall.setDefaultColor();
+				SelectedBall.selectionState = SelectionState.NONE;
+
+				Selected = false;
+
+				//Fix dimple colours
+				foreach(Neighbor n in SelectedBall.CurrentDimple.neighbors)
+				{
+					n.dimple.SetDefaultColor();
+				}
+
+				SelectedBall = null;
+			}
+		}
+
+	}
+
+	public void HighlightNeighboringDimples()
+	{
+		List<Neighbor> neighbors = CurrentDimple.neighbors;
+
+		foreach(Neighbor n in neighbors)
+		{
+			n.dimple.renderer.material.SetColor("_OutlineColor", Color.yellow);
+		}
+	}
+
+	void setDefaultColor()
+	{
+		switch(BallColor)
+		{
+		case TeamColor.BLUE:
+			gameObject.renderer.material.color = Color.blue;
+			break;
+		case TeamColor.RED:
+			gameObject.renderer.material.color = Color.red;
+			break;
+		default:
+			break;
+		}
 	}
 
 	/* method that will move a ball in a certain direction, or hop in a certain direction */
 
+<<<<<<< HEAD
+=======
+	bool moveBall(Direction d){
+		Dimple moveToDimple = CurrentDimple.getNeighborAtDirection(d);
+>>>>>>> 3dfb2dec6068c24852cb1c35e956f9808658a274
 
 
 	public bool moveBall(Direction d){
@@ -109,8 +147,9 @@ public class Ball : MonoBehaviour
 
 			}
 		}
-		currentDimple.toggleOccupied();
+		CurrentDimple.toggleOccupied();
 		// This is where we update position?
+<<<<<<< HEAD
 		currentDimple = moveToDimple;
 		currentDimple.toggleOccupied();
 		Debug.Log (currentDimple);
@@ -119,8 +158,16 @@ public class Ball : MonoBehaviour
 		newPos.x = currentDimple.transform.position.x;
 		newPos.z = currentDimple.transform.position.z;
 		this.transform.position = newPos;
+=======
+		CurrentDimple = moveToDimple;
+		CurrentDimple.toggleOccupied();
+>>>>>>> 3dfb2dec6068c24852cb1c35e956f9808658a274
 
 		return true;
 	
+<<<<<<< HEAD
+=======
+		return UpdateDimple = true;;
+>>>>>>> 3dfb2dec6068c24852cb1c35e956f9808658a274
 	}
 }
