@@ -6,7 +6,6 @@ public class Ball : MonoBehaviour
 {
 	public TeamColor BallColor;
 	public Dimple CurrentDimple;
-	public bool UpdateDimple = false;
 
 	SelectionState selectionState;
 
@@ -120,15 +119,8 @@ public class Ball : MonoBehaviour
 
 	/* method that will move a ball in a certain direction, or hop in a certain direction */
 
-<<<<<<< HEAD
-=======
-	bool moveBall(Direction d){
-		Dimple moveToDimple = CurrentDimple.getNeighborAtDirection(d);
->>>>>>> 3dfb2dec6068c24852cb1c35e956f9808658a274
-
-
 	public bool moveBall(Direction d){
-		Dimple moveToDimple = currentDimple.getNeighborAtDirection(d);
+		Dimple moveToDimple = CurrentDimple.getNeighborAtDirection(d);
 		//Debug.Log (d);
 		//Debug.Log (moveToDimple);
 		if(moveToDimple==null){
@@ -149,25 +141,20 @@ public class Ball : MonoBehaviour
 		}
 		CurrentDimple.toggleOccupied();
 		// This is where we update position?
-<<<<<<< HEAD
-		currentDimple = moveToDimple;
-		currentDimple.toggleOccupied();
-		Debug.Log (currentDimple);
 
-		Vector3 newPos = this.transform.position;
-		newPos.x = currentDimple.transform.position.x;
-		newPos.z = currentDimple.transform.position.z;
-		this.transform.position = newPos;
-=======
 		CurrentDimple = moveToDimple;
 		CurrentDimple.toggleOccupied();
->>>>>>> 3dfb2dec6068c24852cb1c35e956f9808658a274
+		Debug.Log (CurrentDimple);
+
+		Vector3 newPos = this.transform.position;
+		newPos.x = CurrentDimple.transform.position.x;
+		newPos.z = CurrentDimple.transform.position.z;
+		this.transform.position = newPos;
+
+		CurrentDimple = moveToDimple;
+		CurrentDimple.toggleOccupied();
 
 		return true;
 	
-<<<<<<< HEAD
-=======
-		return UpdateDimple = true;;
->>>>>>> 3dfb2dec6068c24852cb1c35e956f9808658a274
 	}
 }
