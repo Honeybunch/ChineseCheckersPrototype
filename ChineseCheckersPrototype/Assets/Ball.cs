@@ -87,14 +87,19 @@ public class Ball : MonoBehaviour
 
 	/* method that will move a ball in a certain direction, or hop in a certain direction */
 
-	bool moveBall(Direction d){
-		Dimple moveToDimple = currentDimple.getNeighborAtDirection(d);
 
+
+	public bool moveBall(Direction d){
+		Dimple moveToDimple = currentDimple.getNeighborAtDirection(d);
+		//Debug.Log (d);
+		//Debug.Log (moveToDimple);
 		if(moveToDimple==null){
 			return false;
 		}
 		else{
 			if(moveToDimple.isOccupied()){
+				Debug.Log ("occupied");
+
 				// if moveToDimple alreayd has a ball, check if we can jump
 				moveToDimple = moveToDimple.getNeighborAtDirection(d);
 				// valid jump?
@@ -108,8 +113,14 @@ public class Ball : MonoBehaviour
 		// This is where we update position?
 		currentDimple = moveToDimple;
 		currentDimple.toggleOccupied();
+		Debug.Log (currentDimple);
 
+		Vector3 newPos = this.transform.position;
+		newPos.x = currentDimple.transform.position.x;
+		newPos.z = currentDimple.transform.position.z;
+		this.transform.position = newPos;
+
+		return true;
 	
-		return updateDimple = true;;
 	}
 }

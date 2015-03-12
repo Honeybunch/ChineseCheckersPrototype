@@ -22,8 +22,13 @@ public class DimplePopulator : MonoBehaviour
 	Dimple noneDimpleThree;
 	Dimple noneDimpleFour;
 
+	bool debug = false;
+	int timer;
+
 	void Start () 
 	{
+		timer = 0;
+
 		//Setup dimples and balls
 		Vector3 centerPosition = gameObject.transform.position;
 
@@ -97,8 +102,8 @@ public class DimplePopulator : MonoBehaviour
 		redDimpleTwo.toggleOccupied();
 		blueDimpleTwo.toggleOccupied();
 
-		redBallObjectOne.GetComponent<Ball>().currentDimple = redDimpleTwo;
-		blueBallObjectOne.GetComponent<Ball>().currentDimple = blueDimpleTwo;
+		redBallObjectOne.GetComponent<Ball>().currentDimple = blueDimpleTwo;
+		blueBallObjectOne.GetComponent<Ball>().currentDimple = redDimpleTwo;
 
 		//Get Ball radius
 		ballRadius = BallObject.transform.localScale.x;
@@ -139,14 +144,25 @@ public class DimplePopulator : MonoBehaviour
 	}
 
 	void Update(){
+		timer++;
 		if(redBallObjectOne.GetComponent<Ball>().updateDimple){
 			redBallObjectOne.GetComponent<Ball>().updateDimple = false;
 			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().currentDimple.Position;
 		}
 
-		foreach(Neighbor n in redDimpleOne.neighbors){
+		//every second?
+		if(debug){
+			if(timer%100 == 0){
+				redBallObjectOne.GetComponent<Ball>().moveBall(Direction.UP_RIGHT);
 
+			}
+
+			foreach(Neighbor n in blueDimpleTwo.neighbors){
+				n.dimple.gameObject.renderer.material.SetColor ("_OutlineColor", Color.yellow);
+				//Debug.Log (n.direction);
+			}
 		}
+
 	}
 
 

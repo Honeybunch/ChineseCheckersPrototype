@@ -113,6 +113,7 @@ public class Dimple : MonoBehaviour
 		foreach(Neighbor n in neighbors){
 			if(n.direction == d){
 				moveToDimple =n.dimple;
+
 			}
 		}
 		return moveToDimple;
