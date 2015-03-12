@@ -33,42 +33,49 @@ public struct Neighbor
 	}
 }
 
-public class Dimple
+public class Dimple : MonoBehaviour
 {
+	//Publics
 	public List<Neighbor> neighbors = new List<Neighbor>();
-	public TeamColor homeColor;
-	public Vector3 position;
-	bool occupied = false;
+	public TeamColor HomeColor = TeamColor.NONE;
+	public Vector3 Position
+	{
+		get{return transform.position;}
+		set{transform.position = value;}
+	}
 
-	//Singleton dimple list
+	//Privates
+	private bool occupied = false;
+
+	//Public Statics
 	public static List<Dimple> Dimples = new List<Dimple>();
 
-	public Dimple(TeamColor homeColor, Vector3 position)
-	{
-		this.homeColor = homeColor;
-		this.position = position;
 
-		//Add to static list
-		Dimples.Add(this);
-
+	/*
 		//Create game object representation of this dimple
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 		go.transform.localScale = new Vector3(.35f, 0, .35f);
 		go.transform.position = position;
 		//Collider will interfere with mouseover
 		GameObject.Destroy(go.GetComponent<Collider>());
+		*/
 
-		switch(homeColor)
+	void Start()
+	{
+		switch(HomeColor)
 		{
 		case TeamColor.BLUE:
-			go.renderer.material.color = Color.blue;
+			renderer.material.SetColor ("_OutlineColor", Color.blue);
 			break;
 		case TeamColor.RED:
-			go.renderer.material.color = Color.red;
+			renderer.material.SetColor ("_OutlineColor", Color.red);
 			break;
 		default:
 			break;
 		}
+
+		//Add to static list
+		Dimples.Add(this);
 	}
 
 	public void AddNeighboringDimple(Neighbor n)

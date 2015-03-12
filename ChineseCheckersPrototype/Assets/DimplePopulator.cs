@@ -3,7 +3,8 @@ using System.Collections;
 
 public class DimplePopulator : MonoBehaviour 
 {
-	public GameObject ballObject;
+	public GameObject BallObject;
+	public GameObject DimpleObject;
 
 	//Simple material to draw some basic circles
 	float ballRadius;
@@ -45,28 +46,44 @@ public class DimplePopulator : MonoBehaviour
 		Vector3 blueFivePos = 	centerPosition + new Vector3( 0.5f, .05f, -1.0f);
 		Vector3 blueSixPos = 	centerPosition + new Vector3(	 0, .05f, -1.5f);
 		
-		redDimpleOne = 	new Dimple(TeamColor.RED, redOnePos);
-		redDimpleTwo = 	new Dimple(TeamColor.RED, redTwoPos);
-		redDimpleThree = new Dimple(TeamColor.RED, redThreePos);
-		//Dimple redDimpleFour = 	new Dimple(TeamColor.RED, redFourPos);
-		//Dimple redDimpleFive = 	new Dimple(TeamColor.RED, redFivePos);
-		//Dimple redDimpleSix = 	new Dimple(TeamColor.RED, redSixPos);
+		redDimpleOne = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		redDimpleOne.HomeColor = TeamColor.RED;
+		redDimpleOne.Position = redOnePos;
 
-		noneDimpleOne	= new Dimple(TeamColor.NONE, noneOnePos);
-		noneDimpleTwo 	= new Dimple(TeamColor.NONE, noneTwoPos);
-		noneDimpleThree	= new Dimple(TeamColor.NONE, noneThreePos);
-		noneDimpleFour 	= new Dimple(TeamColor.NONE, noneFourPos);
+		redDimpleTwo = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		redDimpleTwo.HomeColor = TeamColor.RED;
+		redDimpleTwo.Position = redTwoPos;
 
-		blueDimpleOne 	= 	new Dimple(TeamColor.BLUE, blueOnePos);
-		blueDimpleTwo 	= 	new Dimple(TeamColor.BLUE, blueTwoPos);
-		blueDimpleThree =new Dimple(TeamColor.BLUE, blueThreePos);
-		//Dimple blueDimpleFour = new Dimple(TeamColor.BLUE, blueFourPos);
-		//Dimple blueDimpleFive = new Dimple(TeamColor.BLUE, blueFivePos);
-		//Dimple blueDimpleSix = 	new Dimple(TeamColor.BLUE, blueSixPos);
+		redDimpleThree = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		redDimpleThree.HomeColor = TeamColor.RED;
+		redDimpleThree.Position = redThreePos;
+		
+		noneDimpleOne = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		noneDimpleOne.HomeColor = TeamColor.NONE;
+		noneDimpleOne.Position = noneOnePos;
+		noneDimpleTwo = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		noneDimpleTwo.HomeColor = TeamColor.NONE;
+		noneDimpleTwo.Position = noneTwoPos;
+		noneDimpleThree = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		noneDimpleThree.HomeColor = TeamColor.NONE;
+		noneDimpleThree.Position = noneThreePos;
+		noneDimpleFour = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		noneDimpleFour.HomeColor = TeamColor.NONE;
+		noneDimpleFour.Position = noneFourPos;
+		
+		blueDimpleOne = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		blueDimpleOne.HomeColor = TeamColor.BLUE;
+		blueDimpleOne.Position = blueOnePos;
+		blueDimpleTwo = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		blueDimpleTwo.HomeColor = TeamColor.BLUE;
+		blueDimpleTwo.Position = blueTwoPos;
+		blueDimpleThree = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
+		blueDimpleThree.HomeColor = TeamColor.BLUE;
+		blueDimpleThree.Position = blueThreePos;
 
 		//Create ball game objects
-		redBallObjectOne = GameObject.Instantiate(ballObject) as GameObject;
-		blueBallObjectOne = GameObject.Instantiate(ballObject) as GameObject;
+		redBallObjectOne = GameObject.Instantiate(BallObject) as GameObject;
+		blueBallObjectOne = GameObject.Instantiate(BallObject) as GameObject;
 
 		redBallObjectOne.AddComponent<Ball>();
 		blueBallObjectOne.AddComponent<Ball>();
@@ -83,8 +100,8 @@ public class DimplePopulator : MonoBehaviour
 		redBallObjectOne.GetComponent<Ball>().currentDimple = redDimpleTwo;
 		blueBallObjectOne.GetComponent<Ball>().currentDimple = blueDimpleTwo;
 
-
-		ballRadius = ballObject.transform.localScale.x;
+		//Get Ball radius
+		ballRadius = BallObject.transform.localScale.x;
 
 
 		/*neighbor population*/
@@ -124,7 +141,7 @@ public class DimplePopulator : MonoBehaviour
 	void Update(){
 		if(redBallObjectOne.GetComponent<Ball>().updateDimple){
 			redBallObjectOne.GetComponent<Ball>().updateDimple = false;
-			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().currentDimple.position;
+			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().currentDimple.Position;
 		}
 
 		foreach(Neighbor n in redDimpleOne.neighbors){
