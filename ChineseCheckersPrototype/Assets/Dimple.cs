@@ -32,8 +32,9 @@ public class Dimple : MonoBehaviour
 		if(Ball.Selected)
 		{
 			bool isNeighborToSelected = false;
+			List<Neighbor> neighbors = Ball.SelectedBall.CurrentDimple.neighbors;
 
-			foreach(Neighbor n in Ball.SelectedBall.CurrentDimple.neighbors)
+			foreach(Neighbor n in neighbors)
 			{
 				Dimple d = n.dimple;
 				if(d == this)
@@ -44,13 +45,38 @@ public class Dimple : MonoBehaviour
 			}
 
 			if(isNeighborToSelected)
+			{
 				renderer.material.SetColor ("_OutlineColor", Color.cyan);
+
+				if(Input.GetMouseButtonDown(0))
+				{
+					//We need to know which direction we are to the neighbor
+					Direction direction = Direction.RIGHT;
+					foreach(Neighbor n in neighbors)
+					{
+						Dimple d = n.dimple;
+						d.SetDefaultColor(); //Also fix colors
+
+						if(d == this)
+						{
+							direction = n.direction;
+						}
+					}
+
+					//Move ball
+					Ball.SelectedBall.moveBall(direction);
+					Ball.SelectedBall.HighlightNeighboringDimples();
+				}
+			}
 		}
 	}
 
 	void OnMouseExit()
 	{
-		SetDefaultColor();
+		if(Ball.Selected)
+			Ball.SelectedBall.HighlightNeighboringDimples();
+		else
+			SetDefaultColor();
 	}
 
 	public void AddNeighboringDimple(Neighbor n)
@@ -104,26 +130,18 @@ public class Dimple : MonoBehaviour
 
 	public void SetDefaultColor()
 	{
-		//Set the color to be highlighted if we have a selected ball
+		switch(HomeColor)
+		{
+		case TeamColor.BLUE:
+			renderer.material.SetColor ("_OutlineColor", Color.blue);
+			break;
+		case TeamColor.RED:
+			renderer.material.SetColor ("_OutlineColor", Color.red);
+			break;
+		default:
+			renderer.material.SetColor ("_OutlineColor", new Color(.3f, .3f, .3f));
+			break;
+		}
 
-		if(Ball.Selected)
-		{
-			Ball.SelectedBall.HighlightNeighboringDimples();
-		}
-		else
-		{
-			switch(HomeColor)
-			{
-			case TeamColor.BLUE:
-				renderer.material.SetColor ("_OutlineColor", Color.blue);
-				break;
-			case TeamColor.RED:
-				renderer.material.SetColor ("_OutlineColor", Color.red);
-				break;
-			default:
-				renderer.material.SetColor ("_OutlineColor", new Color(.3f, .3f, .3f));
-				break;
-			}
-		}
 	}
 }

@@ -6,8 +6,6 @@ public class DimplePopulator : MonoBehaviour
 	public GameObject BallObject;
 	public GameObject DimpleObject;
 
-	//Simple material to draw some basic circles
-	float ballRadius;
 	GameObject redBallObjectOne;
 	GameObject blueBallObjectOne;
 
@@ -35,9 +33,6 @@ public class DimplePopulator : MonoBehaviour
 		Vector3 redOnePos = 	centerPosition + new Vector3(-1.0f, .05f, .5f);
 		Vector3 redTwoPos = 	centerPosition + new Vector3(	 0, .05f, .5f);
 		Vector3 redThreePos = 	centerPosition + new Vector3( 1.0f, .05f, .5f);
-		Vector3 redFourPos = 	centerPosition + new Vector3(-0.5f, .05f, 1.0f);
-		Vector3 redFivePos = 	centerPosition + new Vector3( 0.5f, .05f, 1.0f);
-		Vector3 redSixPos = 	centerPosition + new Vector3(	 0, .05f, 1.5f);
 
 		Vector3 noneOnePos =    centerPosition + new Vector3(-1.5f, .05f, 0f);
 		Vector3 noneTwoPos =    centerPosition + new Vector3(-.5f, .05f, 0f);
@@ -47,9 +42,6 @@ public class DimplePopulator : MonoBehaviour
 		Vector3 blueOnePos = 	centerPosition + new Vector3(-1.0f, .05f, -.5f);
 		Vector3 blueTwoPos = 	centerPosition + new Vector3(	 0, .05f, -.5f);
 		Vector3 blueThreePos = 	centerPosition + new Vector3( 1.0f, .05f, -.5f);
-		Vector3 blueFourPos = 	centerPosition + new Vector3(-0.5f, .05f, -1.0f);
-		Vector3 blueFivePos = 	centerPosition + new Vector3( 0.5f, .05f, -1.0f);
-		Vector3 blueSixPos = 	centerPosition + new Vector3(	 0, .05f, -1.5f);
 		
 		redDimpleOne = (GameObject.Instantiate(DimpleObject) as GameObject).AddComponent<Dimple>();
 		redDimpleOne.HomeColor = TeamColor.RED;
@@ -107,9 +99,6 @@ public class DimplePopulator : MonoBehaviour
 
 		redBallObjectOne.GetComponent<Ball>().CurrentDimple = blueDimpleTwo;
 		blueBallObjectOne.GetComponent<Ball>().CurrentDimple = redDimpleTwo;
-		//Get Ball radius
-		ballRadius = BallObject.transform.localScale.x;
-
 
 		/*neighbor population*/
 		redDimpleOne.AddNeighboringDimple(new Neighbor(redDimpleTwo, Direction.RIGHT));
