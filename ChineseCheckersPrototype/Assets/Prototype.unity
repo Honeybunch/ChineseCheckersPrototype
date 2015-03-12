@@ -167,7 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0a09793044904489d9b7aa9533432f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballObject: {fileID: 150828, guid: 3d5e238b34f92354694f857eddd441a2, type: 2}
+  BallObject: {fileID: 150828, guid: 3d5e238b34f92354694f857eddd441a2, type: 2}
+  DimpleObject: {fileID: 186208, guid: ca0a520f7d982a1428a02fcb205bb3dd, type: 2}
 --- !u!23 &1286559901
 Renderer:
   m_ObjectHideFlags: 0
