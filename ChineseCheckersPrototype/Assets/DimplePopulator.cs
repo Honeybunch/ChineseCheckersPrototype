@@ -97,8 +97,8 @@ public class DimplePopulator : MonoBehaviour
 		redDimpleTwo.toggleOccupied();
 		blueDimpleTwo.toggleOccupied();
 
-		redBallObjectOne.GetComponent<Ball>().currentDimple = redDimpleTwo;
-		blueBallObjectOne.GetComponent<Ball>().currentDimple = blueDimpleTwo;
+		redBallObjectOne.GetComponent<Ball>().CurrentDimple = blueDimpleTwo;
+		blueBallObjectOne.GetComponent<Ball>().CurrentDimple = redDimpleTwo;
 
 		//Get Ball radius
 		ballRadius = BallObject.transform.localScale.x;
@@ -139,14 +139,16 @@ public class DimplePopulator : MonoBehaviour
 	}
 
 	void Update(){
-		if(redBallObjectOne.GetComponent<Ball>().updateDimple){
-			redBallObjectOne.GetComponent<Ball>().updateDimple = false;
-			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().currentDimple.Position;
+		if(redBallObjectOne.GetComponent<Ball>().UpdateDimple){
+			redBallObjectOne.GetComponent<Ball>().UpdateDimple = false;
+			redBallObjectOne.transform.position = redBallObjectOne.GetComponent<Ball>().CurrentDimple.Position;
 		}
 
-		foreach(Neighbor n in redDimpleOne.neighbors){
-
+		/*
+		foreach(Neighbor n in redDimpleTwo.neighbors){
+			n.dimple.renderer.material.SetColor("_OutlineColor", Color.yellow);
 		}
+		*/
 	}
 
 
